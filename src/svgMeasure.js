@@ -96,6 +96,11 @@ SVGMeasure.prototype.writeDimensions = function (svgString, dimensions) {
 			}
 		}
 
+		if (!this.getViewboxHeightAndWidth(svgNode) && nodeDimensions.width && nodeDimensions.height) {
+			// insert viewbox
+			svgNode = svgNode.replace('>', ' viewBox="0 0 ' + nodeDimensions.width + ' ' +  nodeDimensions.height + '">');
+		}
+
 		// insert updated svg node
 		return svgString.replace(/<svg(.*?)>/, svgNode);
 	}
